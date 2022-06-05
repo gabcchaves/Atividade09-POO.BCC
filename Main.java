@@ -642,7 +642,7 @@ class Main {
       List<ArrayList<String>> extrato = conta.getExtrato();
 
 		// Mostra saldo anterior
-        System.out.printf("         Saldo anterior            R$ %.2f\n", extrato.get(0).get(3));
+        System.out.printf("         Saldo anterior            R$ %.2f\n", extrato.get(0).get(2));
 
       // Mostra operações subsequentes
       for ( ArrayList<String> conta1 : extrato.subList(1, extrato.size()) ) {
