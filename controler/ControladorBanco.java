@@ -103,9 +103,9 @@ public class ControladorBanco {
 		conta2.setExtrato(LocalDate.now(), "Recebido da conta #" + origem, valor, "C");
     }
 
-    public ArrayList<String> gerarExtrato() {
+    // public ArrayList<String> gerarExtrato() {
 
-      }
+    // }
     
     public List<Conta> getAllContas() {
         return repositorioConta.getAll();
