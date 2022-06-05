@@ -103,9 +103,11 @@ public class ControladorBanco {
 		conta2.setExtrato(LocalDate.now(), "Recebido da conta #" + origem, valor, "C");
     }
 
-    // public ArrayList<String> gerarExtrato() {
-
-    // }
+	// Retornar extrato bancário
+    public ArrayList<String> gerarExtrato(String numeroConta) throws ContaNaoCadastradaException {
+		Conta conta = repositorioConta.buscarConta(numero);
+		return conta.getExtrato();
+    }
     
     public List<Conta> getAllContas() {
         return repositorioConta.getAll();

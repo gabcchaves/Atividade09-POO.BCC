@@ -66,9 +66,9 @@ public abstract class Conta {
   
     public abstract String getTipo();
 
-    // public ArrayList<String> getExtrato() {
-		// TODO
-    // }
+    public ArrayList<String> getExtrato() {
+		return this.extrato;
+    }
 
     public void setExtrato(LocalDate data, String descricao, double valor, String tipoDeTransacao) {
         // Cria um campo do extrato
