@@ -1,70 +1,88 @@
 package model.conta;
 
 import model.cliente.Cliente;
+import java.time.LocalDate;
 
 public abstract class Conta {
-
-  private static int prox_num = 1;
-
-  private String numero;
-  private Cliente titular;
-  private double saldo;
-
-  public Conta(Cliente titular) {
-    this.titular = titular;
-    this.numero = String.valueOf(Conta.prox_num);
-    this.saldo = 0;
-
-    // Incrementar o número para próxima conta
-    prox_num++;
-  }
-
-  public void depositar(double valor) {
-    this.saldo = this.saldo + valor;
-  }
-
-  public void sacar(double valor) throws SaldoInsuficienteException {
-    if (valor <= this.getDisponivelParaSaque()) {
-      this.saldo -= valor;
-    } else {
-      throw new SaldoInsuficienteException(this);
+    
+    private static int prox_num = 1;
+    
+    private String numero;
+    private Cliente titular;
+    private double saldo;
+    private List<String> extrato = new ArrayList<String>();
+  
+    public Conta(Cliente titular) {
+        this.titular =  titular;
+        this.numero = String.valueOf(Conta.prox_num);
+        this.saldo = 0;
+        
+        // Incrementar o número para próxima conta
+        prox_num++;
     }
-  }
+    
+    public void depositar(double valor) {
+        this.saldo = this.saldo + valor;
+    }
+    
+    public void sacar(double valor) throws SaldoInsuficienteException {
+        if (valor <= this.getDisponivelParaSaque()) {
+            this.saldo -= valor;
+        } else {
+            throw new SaldoInsuficienteException(this);
+        }
+    }
+    
+    public void transferir(Conta destino, double valor) throws SaldoInsuficienteException {
+        this.sacar(valor);
+        destino.depositar(valor);
+    }
+    
+    public void setTitular(Cliente titular) {
+        this.titular = titular;
+    }
 
-  public void transferir(Conta destino, double valor) throws SaldoInsuficienteException {
-    this.sacar(valor);
-    destino.depositar(valor);
-  }
+    public Cliente getTitular() {
+        return this.titular;
+    }
+    
+    public String getNumero() {
+        return this.numero;
+    }
+    
+    public double getSaldo() {
+        return this.saldo;
+    }
 
-  public void setTitular(Cliente titular) {
-    this.titular = titular;
-  }
+    protected void setSaldo(double saldo) {
+        this.saldo = saldo;
+    }
 
-  public Cliente getTitular() {
-    return this.titular;
-  }
+    public double getDisponivelParaSaque() {
+        return this.saldo;
+    }
+  
+    public abstract String getTipo();
 
-  public String getNumero() {
-    return this.numero;
-  }
+    public ArrayList<String> getExtrato() {
+		// TODO
+    }
 
-  public double getSaldo() {
-    return this.saldo;
-  }
+    public void setExtrato(LocalDate data, String descricao, double valor, char tipoDeTransacao) {
+        // Cria um campo do extrato
+        ArrayList<String[]> campo = new ArrayList<String[]>();
+		campo.add(data.toString());
+		campo.add(descricao);
+		campo.add(valor.toString());
+		campo.add(tipoDeTransacao);
 
-  protected void setSaldo(double saldo) {
-    this.saldo = saldo;
-  }
-
-  public double getDisponivelParaSaque() {
-    return this.saldo;
-  }
-
-  public abstract String getTipo();
-
-  public String toString() {
-    return "Número...: " + this.getNumero() +
-        "\nTitular..: " + this.getTitular() +
-        "\nSaldo....: " + this.getSaldo();
-  }
+		// Registra o campo no extrato
+		this.add(campo);
+    }
+    
+    public String toString() {
+        return "Número...: " + this.getNumero() +
+               "\nTitular..: " + this.getTitular() +
+               "\nSaldo....: " + this.getSaldo();
+    }
 }
