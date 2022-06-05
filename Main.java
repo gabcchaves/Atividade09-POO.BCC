@@ -639,7 +639,7 @@ class Main {
     try {
         // Tenta obter extrato
       Conta conta = controlador.buscarConta(numeroConta);
-      ArrayList<String> extrato = conta.getExtrato();
+      List<ArrayList<String>> extrato = conta.getExtrato();
 
 		// Mostra saldo anterior
         System.out.printf("         Saldo anterior            R$ %.2f\n", extrato.get(0).get(3));
