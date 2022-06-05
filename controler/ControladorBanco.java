@@ -102,12 +102,6 @@ public class ControladorBanco {
 		conta1.setExtrato(LocalDate.now(), "Transferido para conta #" + destino, valor, "D");
 		conta2.setExtrato(LocalDate.now(), "Recebido da conta #" + origem, valor, "C");
     }
-
-	// Retornar extrato bancário
-    public List<ArrayList<String>> gerarExtrato(String numero) throws ContaNaoCadastradaException {
-		Conta conta = repositorioConta.buscarConta(numero);
-		return conta.getExtrato();
-    }
     
     public List<Conta> getAllContas() {
         return repositorioConta.getAll();

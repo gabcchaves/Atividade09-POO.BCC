@@ -4,8 +4,12 @@ import model.cliente.Cliente;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.ArrayList;
+import java.time.format.DateTimeFormatter;
+import java.text.DecimalFormat;
 
 public abstract class Conta {
+
+    private DecimalFormat df = new DecimalFormat("0.00");
     
     private static int prox_num = 1;
     
@@ -71,11 +75,12 @@ public abstract class Conta {
     }
 
     public void setExtrato(LocalDate data, String descricao, double valor, String tipoDeTransacao) {
-        // Cria um campo do extrato
-        ArrayList<String> campo = new ArrayList<String>();
-		campo.add(data.toString());
+    // Cria um campo do extrato
+    ArrayList<String> campo = new ArrayList<String>();
+
+		campo.add(data.format(DateTimeFormatter.ofPattern("dd/MM/yy"))); // Data formatada
 		campo.add(descricao);
-		campo.add(Double.toString(valor));
+		campo.add(df.format(valor));
 		campo.add(tipoDeTransacao);
 
 		// Registra o campo no extrato

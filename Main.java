@@ -13,6 +13,8 @@ import model.conta.SaldoInsuficienteException;
 import model.conta.LimiteInvalidoException;
 import java.util.List;
 import java.util.Scanner;
+import java.util.List;
+import java.util.ArrayList;
 
 class Main {
 
@@ -629,6 +631,30 @@ class Main {
      * 14/01/19 Tranferido para conta #2         R$ 25,00 D
      *          Saldo atual                     R$ 445,00
      */
+    limpaTela();
+
+    System.out.println("Data     Historico                 Valor           T\n");
+    System.out.println("======== ========================= =============== =\n");
+    System.out.println("         Saldo anterior            R$ 0,00\n");
+
+    try {
+      Conta conta = controlador.buscarConta(numeroConta);
+      
+      for (ArrayList<String> conta1 : conta.getExtrato()) {
+        System.out.printf("%8s ", conta1.get(0));
+        System.out.printf("%-25s ", conta1.get(1));
+        System.out.printf("R$ %-12s ",  conta1.get(2));
+        System.out.printf("%s\n", conta1.get(3));
+      }
+      System.out.printf("%8s Saldo atual %-13s R$ %.2f\n", " ", " ", conta.getSaldo());
+
+    }catch (ContaNaoCadastradaException ex) {
+        System.err.println(ex.getMessage());
+    }
+    
+    System.out.println(); 
+    System.out.println("tecle <enter> para voltar");
+    scanner.nextLine();    
   }
 
   private static void listarContas() {
