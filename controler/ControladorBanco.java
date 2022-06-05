@@ -12,6 +12,7 @@ import model.conta.SaldoInsuficienteException;
 import java.util.List;
 import repository.cliente.RepositorioClienteLista;
 import repository.conta.RepositorioContaLista;
+import java.time.LocalDate;
 
 public class ControladorBanco {
     
@@ -74,12 +75,18 @@ public class ControladorBanco {
         Conta conta = repositorioConta.buscarConta(numero);
         conta.depositar(valor);
         repositorioConta.alterarConta(conta);
+
+		// Data, descrição, valor, tipo de transação
+		conta.setExtrato(LocalDate.now(), "Depósito", valor, "C");
     }
 
     public void saque(String numero, double valor) throws ContaNaoCadastradaException, SaldoInsuficienteException {
         Conta conta = repositorioConta.buscarConta(numero);
         conta.sacar(valor);
         repositorioConta.alterarConta(conta);
+
+		// Data, descrição, valor, tipo de transação
+		conta.setExtrato(LocalDate.now(), "Saque", valor, "D");
     }
 
     public void tranferir(String origem, String destino, double valor) throws ContaNaoCadastradaException, SaldoInsuficienteException {
@@ -88,7 +95,13 @@ public class ControladorBanco {
         conta1.transferir(conta2, valor);
         repositorioConta.alterarConta(conta1);
         repositorioConta.alterarConta(conta2);
+
+		// Data, descrição, valor, tipo de transação
+		conta.setExtrato(LocalDate.now(), "Transferido para conta #" + destino, valor, "D");
     }
+
+    public ArrayList<String> gerarExtrato() {
+
     
     public List<Conta> getAllContas() {
         return repositorioConta.getAll();
