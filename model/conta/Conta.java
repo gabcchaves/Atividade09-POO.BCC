@@ -12,7 +12,7 @@ public abstract class Conta {
     private String numero;
     private Cliente titular;
     private double saldo;
-    private List<String[]> extrato = new ArrayList<String[]>();
+    private List<ArrayList<String>> extrato = new ArrayList<ArrayList<String>>();
   
     public Conta(Cliente titular) {
         this.titular =  titular;
