@@ -10,6 +10,7 @@ import repository.conta.RepositorioConta;
 import model.conta.Conta;
 import model.conta.SaldoInsuficienteException;
 import java.util.List;
+import java.util.ArrayList;
 import repository.cliente.RepositorioClienteLista;
 import repository.conta.RepositorioContaLista;
 import java.time.LocalDate;
@@ -102,6 +103,7 @@ public class ControladorBanco {
 
     public ArrayList<String> gerarExtrato() {
 
+      }
     
     public List<Conta> getAllContas() {
         return repositorioConta.getAll();

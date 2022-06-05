@@ -2,6 +2,8 @@ package model.conta;
 
 import model.cliente.Cliente;
 import java.time.LocalDate;
+import java.util.List;
+import java.util.ArrayList;
 
 public abstract class Conta {
     
@@ -10,7 +12,7 @@ public abstract class Conta {
     private String numero;
     private Cliente titular;
     private double saldo;
-    private List<String> extrato = new ArrayList<String>();
+    private List<String[]> extrato = new ArrayList<String[]>();
   
     public Conta(Cliente titular) {
         this.titular =  titular;

@@ -616,6 +616,8 @@ class Main {
   }
 
   private static void extrato(String numeroConta) {
+
+    
     // TODO Implementar extrato da conta
     /*
      * Exemplo:
