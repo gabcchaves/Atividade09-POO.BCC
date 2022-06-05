@@ -635,17 +635,24 @@ class Main {
 
     System.out.println("Data     Historico                 Valor           T\n");
     System.out.println("======== ========================= =============== =\n");
-    System.out.println("         Saldo anterior            R$ 0,00\n");
 
     try {
+        // Tenta obter extrato
       Conta conta = controlador.buscarConta(numeroConta);
-      
-      for (ArrayList<String> conta1 : conta.getExtrato()) {
+      ArrayList<String> extrato = conta.getExtrato();
+
+		// Mostra saldo anterior
+        System.out.printf("         Saldo anterior            R$ %.2f\n", extrato.get(0).get(3));
+
+      // Mostra operações subsequentes
+      for ( ArrayList<String> conta1 : extrato.subList(1, extrato.size()) ) {
         System.out.printf("%8s ", conta1.get(0));
         System.out.printf("%-25s ", conta1.get(1));
         System.out.printf("R$ %-12s ",  conta1.get(2));
         System.out.printf("%s\n", conta1.get(3));
       }
+
+      // Mostra saldo atual
       System.out.printf("%8s Saldo atual %-13s R$ %.2f\n", " ", " ", conta.getSaldo());
 
     }catch (ContaNaoCadastradaException ex) {
