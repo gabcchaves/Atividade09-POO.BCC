@@ -66,7 +66,7 @@ public abstract class Conta {
   
     public abstract String getTipo();
 
-    public ArrayList<String> getExtrato() {
+    public ArrayList<ArrayList<String>> getExtrato() {
 		return this.extrato;
     }
 
