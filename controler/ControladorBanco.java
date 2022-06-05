@@ -104,7 +104,7 @@ public class ControladorBanco {
     }
 
 	// Retornar extrato bancário
-    public ArrayList<String> gerarExtrato(String numeroConta) throws ContaNaoCadastradaException {
+    public List<ArrayList<String>> gerarExtrato(String numeroConta) throws ContaNaoCadastradaException {
 		Conta conta = repositorioConta.buscarConta(numero);
 		return conta.getExtrato();
     }
