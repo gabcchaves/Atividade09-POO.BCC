@@ -70,16 +70,16 @@ public abstract class Conta {
 		// TODO
     }
 
-    public void setExtrato(LocalDate data, String descricao, double valor, char tipoDeTransacao) {
+    public void setExtrato(LocalDate data, String descricao, double valor, String tipoDeTransacao) {
         // Cria um campo do extrato
-        ArrayList<String[]> campo = new ArrayList<String[]>();
+        ArrayList<String> campo = new ArrayList<String>();
 		campo.add(data.toString());
 		campo.add(descricao);
-		campo.add(valor.toString());
+		campo.add(Double.toString(valor));
 		campo.add(tipoDeTransacao);
 
 		// Registra o campo no extrato
-		this.add(campo);
+		this.extrato.add(campo);
     }
     
     public String toString() {
