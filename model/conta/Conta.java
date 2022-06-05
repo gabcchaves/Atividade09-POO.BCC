@@ -29,11 +29,17 @@ public abstract class Conta {
     
     public void depositar(double valor) {
         this.saldo = this.saldo + valor;
+
+        // Registro da operação no extrato
+        this.setExtrato(LocalDate.now(), "Depósito", valor, "C");
     }
     
     public void sacar(double valor) throws SaldoInsuficienteException {
         if (valor <= this.getDisponivelParaSaque()) {
             this.saldo -= valor;
+
+            // Registro da operação no extrato
+            this.setExtrato(LocalDate.now(), "Saque", valor, "D");
         } else {
             throw new SaldoInsuficienteException(this);
         }
@@ -42,6 +48,10 @@ public abstract class Conta {
     public void transferir(Conta destino, double valor) throws SaldoInsuficienteException {
         this.sacar(valor);
         destino.depositar(valor);
+
+        // Registro da operação nos extratos de ambas as contas
+        this.setExtrato(LocalDate.now(), "Transferido para a conta #" + destino.getNumero(), valor, "D");
+        destino.setExtrato(LocalDate.now(), "Recebido da conta #" + this.getNumero(), valor, "C");
     }
     
     public void setTitular(Cliente titular) {
