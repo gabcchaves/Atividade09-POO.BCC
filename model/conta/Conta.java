@@ -51,7 +51,9 @@ public abstract class Conta {
 
         // Registro da operação nos extratos de ambas as contas
         this.setExtrato(LocalDate.now(), "Transferido para a conta #" + destino.getNumero(), valor, "D");
+        this.extrato.remove(extrato.size()-2);
         destino.setExtrato(LocalDate.now(), "Recebido da conta #" + this.getNumero(), valor, "C");
+        destino.extrato.remove(extrato.size()-2);
     }
     
     public void setTitular(Cliente titular) {
