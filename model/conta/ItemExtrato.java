@@ -6,7 +6,7 @@ public class ItemExtrato {
     private double saldoAnterior;
     
     public ItemExtrato(double saldoAnterior) {
-        this.saldoAnterior = novoSaldoAnterior;
+        this.saldoAnterior = saldoAnterior;
     }
     
     // Definir data do item
